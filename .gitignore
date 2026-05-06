@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+.bundle/
+vendor/bundle
+bin/
+tmp/
+log/
+public/assets
+public/packs
+public/packs-test
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Environment
+.env*
+
+# Tests
+coverage/
