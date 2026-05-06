@@ -5,9 +5,9 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs gi
 
 WORKDIR /app
 
-# O bundle install será feito no commit 2 após inicializar o Rails
-# COPY Gemfile Gemfile.lock ./
-# RUN bundle install
+# Copia e instala gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
 
 EXPOSE 3000
 
