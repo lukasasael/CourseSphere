@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { apiFetch } from '../utils/api';
+import Spinner from '../components/Spinner';
 
 export default function CourseDetails() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ export default function CourseDetails() {
     fetchDetails();
   }, [id]);
 
-  if (loading) return <div className="text-center py-12">Carregando...</div>;
+  if (loading) return <Spinner />;
   if (!data) return <div className="text-center py-12 text-red-600">Curso não encontrado.</div>;
 
   const { course, lessons, guest_instructor } = data;
