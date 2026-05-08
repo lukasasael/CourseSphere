@@ -50,6 +50,8 @@ export default function Login() {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all text-gray-800"
             placeholder="seu@email.com"
             required
+            onInvalid={(e) => e.target.setCustomValidity('Por favor, insira o seu e-mail.')}
+            onInput={(e) => e.target.setCustomValidity('')}
           />
         </div>
         <div>
@@ -61,6 +63,8 @@ export default function Login() {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all text-gray-800"
             placeholder="••••••••"
             required
+            onInvalid={(e) => e.target.setCustomValidity('Por favor, insira a sua senha.')}
+            onInput={(e) => e.target.setCustomValidity('')}
           />
         </div>
         <button 
