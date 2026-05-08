@@ -6,7 +6,8 @@ export async function apiFetch(endpoint, options = {}) {
     ...options.headers,
   };
 
-  const response = await fetch(`http://localhost:3000${endpoint}`, {
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+  const response = await fetch(`${API_URL}${endpoint}`, {
     ...options,
     headers,
   });

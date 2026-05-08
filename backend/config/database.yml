@@ -17,5 +17,6 @@ test:
 production:
   <<: *default
   database: coursesphere_production
-  username: coursesphere
-  password: <%= ENV["APP_DATABASE_PASSWORD"] %>
+  url: <%= ENV.fetch("DATABASE_URL", "") %>
+  username: <%= ENV.fetch("APP_DATABASE_USERNAME", "coursesphere") %>
+  password: <%= ENV.fetch("APP_DATABASE_PASSWORD", "") %>
