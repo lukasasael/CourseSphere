@@ -3,8 +3,8 @@ FROM node:20-alpine
 WORKDIR /app
 
 # O npm install será rodado após inicializar o Vite no commit 6
-# COPY package.json package-lock.json ./
-# RUN npm install
+COPY package.json package-lock.json ./
+RUN npm install
 
 EXPOSE 5173
 

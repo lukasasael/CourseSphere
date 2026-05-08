@@ -28,6 +28,18 @@ export function AuthProvider({ children }) {
     localStorage.setItem('user', JSON.stringify(data.user));
   };
 
+  const register = async (name, email, password, password_confirmation) => {
+    const data = await apiFetch('/users', {
+      method: 'POST',
+      body: JSON.stringify({ user: { name, email, password, password_confirmation } })
+    });
+    
+    setToken(data.token);
+    setUser(data.user);
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', JSON.stringify(data.user));
+  };
+
   const logout = () => {
     setToken(null);
     setUser(null);
@@ -36,7 +48,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

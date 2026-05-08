@@ -7,13 +7,13 @@ class CoursesController < ApplicationController
     if params[:name].present?
       @courses = @courses.where("name ILIKE ?", "%#{params[:name]}%")
     end
-    render json: @courses, include: :user
+    render json: @courses, include: :creator
   end
 
   def show
     guest_info = RandomUserService.fetch_user
     render json: {
-      course: @course.as_json(include: :user),
+      course: @course.as_json(include: :creator),
       lessons: @course.lessons,
       guest_instructor: guest_info
     }

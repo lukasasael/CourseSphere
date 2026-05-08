@@ -13,7 +13,15 @@ export async function apiFetch(endpoint, options = {}) {
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.error || errorData.errors || 'Falha na requisição. Verifique os dados e tente novamente.');
+    let errMsg = 'Falha na requisição. Verifique os dados e tente novamente.';
+    if (Array.isArray(errorData.errors)) {
+      errMsg = errorData.errors.join('\n');
+    } else if (typeof errorData.errors === 'string') {
+      errMsg = errorData.errors;
+    } else if (errorData.error) {
+      errMsg = errorData.error;
+    }
+    throw new Error(errMsg);
   }
 
   // Handle empty responses (like 204 No Content)

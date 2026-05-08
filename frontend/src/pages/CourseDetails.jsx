@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { apiFetch } from '../utils/api';
 import Spinner from '../components/Spinner';
+import { useAuth } from '../context/AuthContext';
 
 export default function CourseDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -26,6 +29,19 @@ export default function CourseDetails() {
   if (!data) return <div className="text-center py-12 text-red-600">Curso não encontrado.</div>;
 
   const { course, lessons, guest_instructor } = data;
+  const isCreator = user && course && user.id === course.user_id;
+
+  const handleDelete = async () => {
+    if (confirm('Tem certeza que deseja excluir este curso?')) {
+      try {
+        await apiFetch(`/courses/${id}`, { method: 'DELETE' });
+        navigate('/courses');
+      } catch (err) {
+        console.error(err);
+        alert('Erro ao excluir curso.');
+      }
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto py-8">
@@ -35,11 +51,22 @@ export default function CourseDetails() {
         <h1 className="text-3xl font-extrabold text-gray-900 mb-4">{course.name}</h1>
         <p className="text-gray-700 text-lg mb-6">{course.description}</p>
         
-        <div className="flex gap-4 text-sm text-gray-500">
+        <div className="flex gap-4 text-sm text-gray-500 mb-6">
           <span>Início: {course.start_date || 'N/A'}</span>
           <span>Fim: {course.end_date || 'N/A'}</span>
-          <span>Autor: {course.user?.name || 'Desconhecido'}</span>
+          <span>Autor: {course.creator?.name || 'Desconhecido'}</span>
         </div>
+        
+        {isCreator && (
+          <div className="flex gap-3">
+            <Link to={`/courses/${id}/edit`} className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors">
+              Editar Curso
+            </Link>
+            <button onClick={handleDelete} className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+              Excluir Curso
+            </button>
+          </div>
+        )}
       </div>
 
       {guest_instructor && (
@@ -55,6 +82,11 @@ export default function CourseDetails() {
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Lições</h2>
+          {isCreator && (
+            <Link to={`/courses/${id}/lessons/new`} className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors text-sm">
+              + Nova Lição
+            </Link>
+          )}
         </div>
         {lessons && lessons.length > 0 ? (
           <ul className="divide-y divide-gray-100">

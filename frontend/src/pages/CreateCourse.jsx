@@ -39,7 +39,7 @@ export default function CreateCourse() {
     <div className="max-w-2xl mx-auto py-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Criar Novo Curso</h1>
       
-      {error && <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6">{error}</div>}
+      {error && <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6 whitespace-pre-line">{error}</div>}
 
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 space-y-6">
         <div>

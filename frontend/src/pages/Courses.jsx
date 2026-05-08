@@ -58,7 +58,7 @@ export default function Courses() {
               <h2 className="text-xl font-bold text-gray-900 mb-2">{course.name}</h2>
               <p className="text-gray-600 mb-4 line-clamp-2">{course.description}</p>
               <div className="text-sm text-gray-500 mb-4">
-                Criado por: {course.user?.name || 'Desconhecido'}
+                Criado por: {course.creator?.name || 'Desconhecido'}
               </div>
               <Link to={`/courses/${course.id}`} className="text-indigo-600 font-medium hover:text-indigo-800">
                 Ver detalhes &rarr;
