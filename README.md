@@ -92,3 +92,18 @@ Caso prefira configurar o ambiente localmente sem Docker, siga as instruções a
 - **Backend**: Ruby on Rails 8, PostgreSQL, JWT (Authentication)
 - **Frontend**: React 19, Vite, Tailwind CSS v4, React Router
 - **Infraestrutura**: Docker Compose, Vercel (Deploy Frontend), Render (Deploy Backend)
+
+---
+
+## 🤖 Desenvolvimento com IA (Antigravity & Obsidian)
+
+Este projeto foi desenvolvido com o auxílio do **Antigravity**, um agente de IA focado em engenharia de software autônoma.
+
+Durante o ciclo de desenvolvimento, utilizei a **Técnica de Karpathy aliada ao Obsidian** para gerar e manter uma "Wiki Viva" (LLM Wiki) do projeto. Essa abordagem de gestão do conhecimento e estruturação da informação permite que o agente consulte arquivos consolidados com o progresso atual, regras de negócio e conceitos importantes.
+
+**Principais benefícios dessa otimização agêntica:**
+- **Redução drástica no consumo de Tokens:** Em vez de poluir a janela de contexto com históricos imensos ou buscar em todos os arquivos toda vez, o agente acessa diretamente os resumos indexados e referenciados na wiki.
+- **Preservação de Contexto de Longo Prazo:** Decisões importantes não se perdem no histórico da conversa, pois são persistidas e organizadas em notas locais.
+- **Maior Precisão e Eficiência:** Com as informações curadas na wiki, o agente não perde tempo tentando "adivinhar" o que já foi construído, reduzindo alucinações e entregando código mais assertivo, rápido e de melhor qualidade.
+
+Esse método demonstra um trabalho sólido de **otimização agêntica**, extraindo o máximo de valor da IA com uma arquitetura de contexto inteligente.
