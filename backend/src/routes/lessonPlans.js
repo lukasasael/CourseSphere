@@ -24,7 +24,7 @@ router.get('/', authenticate, async (req, res) => {
 
     // Filter by discipline
     if (discipline) {
-      where.discipline = discipline;
+      where.discipline = { [Op.like]: `%${discipline}%` };
     }
 
     // Filter by planned date

@@ -12,7 +12,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   if (user) {
-    return <Navigate to="/courses" replace />;
+    return <Navigate to="/lesson-plans" replace />;
   }
 
   const handleSubmit = async (e) => {

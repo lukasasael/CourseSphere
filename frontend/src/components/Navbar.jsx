@@ -17,9 +17,7 @@ export default function Navbar() {
           CourseSphere
         </Link>
         <div className="space-x-4 flex items-center">
-          <Link to="/courses" className="hover:text-indigo-200 transition-colors font-medium">
-            Cursos
-          </Link>
+
           <Link to="/lesson-plans" className="hover:text-indigo-200 transition-colors font-medium">
             Planos de Aula
           </Link>

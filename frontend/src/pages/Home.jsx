@@ -5,7 +5,7 @@ export default function Home() {
   const { user } = useAuth();
 
   if (user) {
-    return <Navigate to="/courses" replace />;
+    return <Navigate to="/lesson-plans" replace />;
   }
 
   return (
@@ -16,14 +16,9 @@ export default function Home() {
       <p className="text-xl text-gray-600 mb-8">
         A plataforma definitiva para gerenciar seus cursos e lições.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-        <Link to="/register" className="block text-left bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-          <h2 className="text-2xl font-bold text-indigo-600 mb-2">Para Instrutores</h2>
-          <p className="text-gray-600">Crie cursos, adicione lições em vídeo e gerencie seus alunos em um só lugar.</p>
-        </Link>
-        <Link to="/register" className="block text-left bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-          <h2 className="text-2xl font-bold text-indigo-600 mb-2">Para Estudantes</h2>
-          <p className="text-gray-600">Acesse conteúdo de qualidade, acompanhe seu progresso e interaja com a comunidade.</p>
+      <div className="mt-12">
+        <Link to="/login" className="inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-xl shadow-sm hover:bg-indigo-700 transition-colors">
+          Clique aqui para fazer login
         </Link>
       </div>
     </div>
