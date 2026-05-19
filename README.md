@@ -124,3 +124,15 @@ CourseSphere/
 ├── docker-compose.yml
 └── .github/workflows/     # CI (lint pipeline)
 ```
+
+---
+
+## 🎁 Diferenciais & Itens Bônus Implementados
+
+Para elevar a qualidade técnica e de entrega do projeto, foram implementados os seguintes bônus:
+
+1. **Dockerização Completa**: O projeto possui suporte para subida imediata em contêineres de forma integrada (`docker-compose.yml`), isolando o banco de dados (SQLite local em volume/arquivo), a API Node.js e a aplicação frontend em React.
+2. **Logs Estruturados**: O backend utiliza um logger customizado que gera mensagens estruturadas com timestamps e metadados contextuais (por exemplo, token usage e latência de respostas do Gemini API).
+3. **Endpoint de Health Check**: Endpoint `/health` disponível no backend para monitoramento e validação de uptime.
+4. **Integração Contínua (CI)**: Pipeline configurado via GitHub Actions (`lint.yml`) que valida a conformidade de linting em toda base de código (JS e React) a cada push ou pull request na branch principal.
+

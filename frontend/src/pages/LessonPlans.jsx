@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { apiFetch } from '../utils/api';
 import Spinner from '../components/Spinner';
+import { useAuth } from '../context/AuthContext';
 
 export default function LessonPlans() {
+  const { user } = useAuth();
   const [plans, setPlans] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, total_pages: 1, total: 0 });
   const [loading, setLoading] = useState(true);
@@ -17,16 +19,12 @@ export default function LessonPlans() {
   const [sortOrder, setSortOrder] = useState('DESC');
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetchPlans();
-  }, [page, sortBy, sortOrder]);
-
   const fetchPlans = async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
       params.append('page', page);
-      params.append('per_page', '9');
+      params.append('per_page', '6');
       params.append('sort_by', sortBy);
       params.append('sort_order', sortOrder);
       if (search) params.append('search', search);
@@ -43,6 +41,12 @@ export default function LessonPlans() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchPlans();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, sortBy, sortOrder]);
 
   const handleFilter = (e) => {
     e.preventDefault();
@@ -210,20 +214,22 @@ export default function LessonPlans() {
                   {plan.planned_date && <span>📅 {plan.planned_date}</span>}
                   {plan.creator && <span className="ml-3">👤 {plan.creator.name}</span>}
                 </div>
-                <div className="flex gap-2 pt-2 border-t border-gray-100">
-                  <Link
-                    to={`/lesson-plans/${plan.id}/edit`}
-                    className="text-indigo-600 text-sm font-medium hover:text-indigo-800"
-                  >
-                    Editar
-                  </Link>
-                  <button
-                    onClick={() => handleDelete(plan.id)}
-                    className="text-red-500 text-sm font-medium hover:text-red-700 ml-auto"
-                  >
-                    Excluir
-                  </button>
-                </div>
+                {user && plan.creator && user.id === plan.creator.id && (
+                  <div className="flex gap-2 pt-2 border-t border-gray-100">
+                    <Link
+                      to={`/lesson-plans/${plan.id}/edit`}
+                      className="text-indigo-600 text-sm font-medium hover:text-indigo-800"
+                    >
+                      Editar
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(plan.id)}
+                      className="text-red-500 text-sm font-medium hover:text-red-700 ml-auto"
+                    >
+                      Excluir
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           ))}

@@ -7,7 +7,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout();
-    window.location.href = '/';
+    navigate('/');
   };
 
   return (

@@ -24,28 +24,28 @@ export default function LessonPlanForm() {
   const [aiError, setAiError] = useState('');
 
   useEffect(() => {
+    const fetchPlan = async () => {
+      try {
+        const data = await apiFetch(`/lesson-plans/${id}`);
+        setFormData({
+          title: data.title || '',
+          objective: data.objective || '',
+          summary: data.summary || '',
+          planned_date: data.planned_date || '',
+          discipline: data.discipline || '',
+          contents: data.contents || '',
+          resources: data.resources || '',
+          tags: data.tags || [],
+        });
+      } catch {
+        setError('Erro ao carregar plano de aula.');
+      }
+    };
+
     if (isEditing) {
       fetchPlan();
     }
-  }, [id]);
-
-  const fetchPlan = async () => {
-    try {
-      const data = await apiFetch(`/lesson-plans/${id}`);
-      setFormData({
-        title: data.title || '',
-        objective: data.objective || '',
-        summary: data.summary || '',
-        planned_date: data.planned_date || '',
-        discipline: data.discipline || '',
-        contents: data.contents || '',
-        resources: data.resources || '',
-        tags: data.tags || [],
-      });
-    } catch (err) {
-      setError('Erro ao carregar plano de aula.');
-    }
-  };
+  }, [id, isEditing]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

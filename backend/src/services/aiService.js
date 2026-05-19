@@ -9,7 +9,7 @@ async function generateRecommendations({ title, discipline, summary }) {
   }
 
   const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
 
   const prompt = `Você é um Assistente Pedagógico especialista. Com base nas informações abaixo sobre um plano de aula, forneça recomendações estruturadas em formato JSON.
 
