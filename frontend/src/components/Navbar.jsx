@@ -20,6 +20,9 @@ export default function Navbar() {
           <Link to="/courses" className="hover:text-indigo-200 transition-colors font-medium">
             Cursos
           </Link>
+          <Link to="/lesson-plans" className="hover:text-indigo-200 transition-colors font-medium">
+            Planos de Aula
+          </Link>
           {user ? (
             <>
               <span className="text-indigo-200">Olá, {user.name}</span>

@@ -2,7 +2,6 @@
 node_modules/
 .bundle/
 vendor/bundle
-bin/
 tmp/
 log/
 public/assets
@@ -15,7 +14,17 @@ public/packs-test
 .DS_Store
 
 # Environment
-.env*
+.env
+.env.local
+
+# Keep .env.example as documentation
+!.env.example
+
+# Database
+*.sqlite
+
+# Backup
+backend-rails/
 
 # Tests
 coverage/

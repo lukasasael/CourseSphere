@@ -1,109 +1,126 @@
 # CourseSphere
 
-CourseSphere é uma aplicação web full-stack para gerenciamento de cursos e aulas, construída com Ruby on Rails (API) no backend e React (Vite + Tailwind CSS) no frontend. O sistema permite a criação de cursos, gerenciamento de aulas e possui um sistema robusto de controle de acesso (RBAC), além de integração externa para buscar detalhes de instrutores convidados.
+CourseSphere é uma aplicação web full-stack para gerenciamento de cursos, aulas e **planos de aula com assistência de IA (Smart Assist)**. Construída com **Node.js/Express** (API) no backend e **React** (Vite + Tailwind CSS) no frontend.
 
-## 🚀 Deploy
-
-A aplicação está disponível online. Acesse os links abaixo:
-
-- **Frontend:** [https://course-sphere-iota.vercel.app/](https://course-sphere-iota.vercel.app/)
-- **Backend (API):** [https://coursesphere-api-gqko.onrender.com](https://coursesphere-api-gqko.onrender.com)
-
-### Instruções de Login (Deploy e Local)
-
-Para testar a aplicação, utilize as seguintes credenciais de teste:
-
-| Usuário | Senha |
-| --- | --- |
-| `estudante@email.com` | `password` |
-| `instrutor@example.com` | `password` |
-| `instrutor2@example.com` | `password` |
-
-Você também pode criar seus próprios usuários acessando a área de cadastro.
+O sistema permite:
+- Criação e gerenciamento de cursos e lições
+- CRUD completo de **Planos de Aula** com filtros avançados, busca e paginação
+- **Smart Assist**: Geração de recomendações de conteúdo, recursos e tags via IA (Google Gemini)
+- Autenticação JWT com controle de acesso
+- Logs estruturados e observabilidade
 
 ---
 
-## 🐳 Rodando com Docker (Recomendado)
+## 🚀 Quick Start com Docker
 
-A maneira mais simples de inicializar o projeto localmente é utilizando o Docker e Docker Compose.
+```bash
+docker compose up --build
+```
 
-1. Clone o repositório.
-2. Na raiz do projeto, execute o comando para construir e subir os containers:
-   ```bash
-   docker compose up --build
-   ```
-3. O backend estará disponível em `http://localhost:3000`.
-4. O frontend estará disponível em `http://localhost:5173`.
-5. Em um novo terminal, rode as migrations para configurar o banco de dados (o seed também pode ser rodado para popular os dados):
-   ```bash
-   docker compose run --rm backend rails db:migrate db:seed
-   ```
+- **Backend (API):** http://localhost:3000
+- **Frontend:** http://localhost:5173
+- **Health Check:** http://localhost:3000/health
 
 ---
 
 ## 💻 Rodando Localmente (Sem Docker)
 
-Caso prefira configurar o ambiente localmente sem Docker, siga as instruções abaixo.
+### Backend
 
-### Passo a passo para rodar o Backend
+```bash
+cd backend
+cp .env.example .env   # Configure sua GEMINI_API_KEY aqui
+npm install
+node server.js --seed  # Cria banco + dados de teste
+node server.js         # Inicia o servidor
+```
 
-**Pré-requisitos:** Ruby, Bundler e PostgreSQL instalados.
+A API estará rodando em `http://localhost:3000`.
 
-1. Navegue até o diretório do backend:
-   ```bash
-   cd backend
-   ```
-2. Instale as dependências:
-   ```bash
-   bundle install
-   ```
-3. Configure o banco de dados (certifique-se de que o serviço do PostgreSQL está rodando):
-   ```bash
-   rails db:create db:migrate db:seed
-   ```
-4. Inicie o servidor:
-   ```bash
-   rails server
-   ```
-   A API estará rodando em `http://localhost:3000`.
+### Frontend
 
-### Passo a passo para rodar o Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-**Pré-requisitos:** Node.js e npm instalados.
+A aplicação estará acessível em `http://localhost:5173`.
 
-1. Em um novo terminal, navegue até o diretório do frontend:
-   ```bash
-   cd frontend
-   ```
-2. Instale as dependências:
-   ```bash
-   npm install
-   ```
-3. Inicie o servidor de desenvolvimento:
-   ```bash
-   npm run dev
-   ```
-   A aplicação estará acessível em `http://localhost:5173`.
+---
+
+## 🔑 Credenciais de Teste
+
+| Usuário | Senha |
+| --- | --- |
+| `instrutor@example.com` | `password` |
+| `instrutor2@example.com` | `password` |
+| `estudante@email.com` | `password` |
 
 ---
 
 ## 🛠️ Stack Tecnológica
 
-- **Backend**: Ruby on Rails 8, PostgreSQL, JWT (Authentication)
+- **Backend**: Node.js, Express, Sequelize, SQLite, JWT, Google Gemini API
 - **Frontend**: React 19, Vite, Tailwind CSS v4, React Router
-- **Infraestrutura**: Docker Compose, Vercel (Deploy Frontend), Render (Deploy Backend)
+- **Infraestrutura**: Docker Compose, GitHub Actions (CI/Linting)
 
 ---
 
-## 🤖 Desenvolvimento com IA (Antigravity & Obsidian)
+## 🤖 Smart Assist (IA)
 
-Este projeto foi desenvolvido com o auxílio do **Antigravity**, um agente de IA focado em engenharia de software autônoma.
+O recurso de **Smart Assist** utiliza a API do Google Gemini para sugerir automaticamente:
+- **Conteúdos complementares** para a aula
+- **Recursos de apoio** (livros, links, materiais)
+- **3 tags** relevantes
 
-Durante o ciclo de desenvolvimento, utilizei a **Técnica de Karpathy aliada ao Obsidian** para gerar e manter uma "Wiki Viva" (LLM Wiki) do projeto. Essa abordagem de gestão do conhecimento e estruturação da informação permite que o agente consulte arquivos consolidados com o progresso atual, regras de negócio e conceitos importantes.
+### Como usar:
+1. No formulário de "Novo Plano de Aula", preencha: **Título**, **Disciplina** e **Ementa/Resumo**.
+2. Clique no botão **"Gerar Recomendações com IA"**.
+3. Os campos de Conteúdos, Recursos e Tags serão preenchidos automaticamente.
 
-**Principais benefícios dessa otimização agêntica:**
-- **Redução drástica no consumo de Tokens:** Em vez de poluir a janela de contexto com históricos imensos ou buscar em todos os arquivos toda vez, o agente acessa diretamente os resumos indexados e referenciados na wiki.
-- **Preservação de Contexto de Longo Prazo:** Decisões importantes não se perdem no histórico da conversa, pois são persistidas e organizadas em notas locais.
-- **Maior Precisão e Eficiência:** Com as informações curadas na wiki, o agente não perde tempo tentando "adivinhar" o que já foi construído, reduzindo alucinações e entregando código mais assertivo, rápido e de melhor qualidade.
+### Configuração da API Key:
+```bash
+# No arquivo backend/.env
+GEMINI_API_KEY=sua_chave_aqui
+```
 
-Esse método demonstra um trabalho sólido de **otimização agêntica**, extraindo o máximo de valor da IA com uma arquitetura de contexto inteligente.
+---
+
+## 📊 Observabilidade
+
+O backend possui logs estruturados para todas as operações principais:
+
+```
+[INFO] AI Request, Title="Introdução ao OSPF", Discipline="Redes", TokenUsage=180, Latency="1.4s"
+[INFO] POST /lesson-plans, status=201, duration="45ms"
+```
+
+Endpoint de health check: `GET /health`
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+CourseSphere/
+├── backend/               # API Node.js/Express
+│   ├── src/
+│   │   ├── config/        # Database config & seeds
+│   │   ├── middleware/     # JWT auth middleware
+│   │   ├── models/        # Sequelize models (User, Course, Lesson, LessonPlan)
+│   │   ├── routes/        # Express routes
+│   │   ├── services/      # AI service (Gemini integration)
+│   │   └── utils/         # Structured logger
+│   ├── server.js          # Entry point
+│   └── Dockerfile
+├── frontend/              # React SPA
+│   ├── src/
+│   │   ├── components/    # Layout, Navbar, Spinner, ProtectedRoute
+│   │   ├── context/       # AuthContext (JWT)
+│   │   ├── pages/         # All page components
+│   │   └── utils/         # API client
+│   └── Dockerfile
+├── docker-compose.yml
+└── .github/workflows/     # CI (lint pipeline)
+```

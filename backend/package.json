@@ -1,0 +1,25 @@
+{
+  "name": "coursesphere-backend",
+  "version": "2.0.0",
+  "description": "CourseSphere API - Node.js/Express backend with Smart Assist (AI)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "seed": "node server.js --seed",
+    "lint": "echo 'No linter configured yet'"
+  },
+  "keywords": ["coursesphere", "express", "api", "ai"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
+  }
+}
